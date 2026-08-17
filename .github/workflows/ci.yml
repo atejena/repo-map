@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      # Tests build throwaway git repos, so git must be able to commit.
+      - name: Configure git
+        run: |
+          git config --global user.email "ci@example.com"
+          git config --global user.name "CI"
+          git config --global init.defaultBranch main
+      - run: npm test
+
+  selfmap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      # Dogfooding: the tool must survive being pointed at itself, and the
+      # committed map must match what a fresh run produces.
+      - run: node bin/cli.mjs all --repo .
+      - name: Fail if the committed map is stale
+        run: |
+          if ! git diff --quiet --exit-code .codemap/snapshot.json docs/codemap/; then
+            echo "::error::Map is stale. Run 'npm run selfmap' and commit the result."
+            git diff --stat .codemap/snapshot.json docs/codemap/
+            exit 1
+          fi
