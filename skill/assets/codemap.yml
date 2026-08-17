@@ -1,0 +1,42 @@
+# Drop into .github/workflows/codemap.yml
+# Gates on findings INTRODUCED by the PR, not on the pre-existing backlog,
+# so an inherited mess never blocks unrelated work.
+name: Codebase map
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  codemap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # report-map.mjs reads the previous snapshot from git
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build map
+        run: node scripts/build-map.mjs
+
+      - name: Report and gate on new findings
+        run: node scripts/report-map.mjs --fail-on regression
+
+      - name: Upload map
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codemap
+          path: |
+            docs/codemap/
+            .codemap/report.json
+
+      - name: Fail if snapshot was not committed
+        run: |
+          if ! git diff --quiet --exit-code .codemap/snapshot.json; then
+            echo "::error::.codemap/snapshot.json is stale. Run the mapper and commit it."
+            exit 1
+          fi
