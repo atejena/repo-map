@@ -1,0 +1,18 @@
+{
+  "name": "repo-map",
+  "version": "0.1.0",
+  "description": "Keeps a committed map of your codebase so AI agents can understand it without reading every file, and so dead code, junk and coupling get caught before they land.",
+  "type": "module",
+  "bin": { "repo-map": "bin/cli.mjs" },
+  "exports": { ".": "./src/build-map.mjs" },
+  "files": ["bin", "src", "skill", "README.md", "LICENSE"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "selfmap": "node bin/cli.mjs all --repo ."
+  },
+  "keywords": ["codebase-map","dependency-graph","dead-code","ai-agents","llm-context","claude","refactoring","code-health","modularization","typescript"],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
