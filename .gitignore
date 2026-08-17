@@ -1,0 +1,6 @@
+node_modules/
+*.log
+.DS_Store
+.codemap/report.json
+.codemap/snapshot.prev.json
+coverage/
