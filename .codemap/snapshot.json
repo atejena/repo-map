@@ -1,0 +1,260 @@
+{
+  "schema": "codemap/1",
+  "generatedAt": "2026-08-17T14:31:41.183Z",
+  "repo": "repo-surveyor",
+  "git": {
+    "sha": "a9537c66e8d1d7816fc8c261c3b364eacd13fb8d",
+    "shortSha": "a9537c6",
+    "branch": "master",
+    "subject": "v0.1.0",
+    "author": "t",
+    "committedAt": "2026-08-17T14:13:58+00:00"
+  },
+  "config": {
+    "roots": [
+      "src",
+      "bin",
+      "test"
+    ],
+    "moduleDepth": 1,
+    "tsconfig": null
+  },
+  "totals": {
+    "files": 8,
+    "testFiles": 1,
+    "loc": 2112,
+    "edges": 2,
+    "modules": 1,
+    "entries": 7,
+    "externalPackages": 1
+  },
+  "files": {
+    "bin/cli.mjs": {
+      "path": "bin/cli.mjs",
+      "loc": 98,
+      "rawLoc": 128,
+      "bytes": 4829,
+      "exports": [],
+      "isTest": false,
+      "todos": 0,
+      "commentedOutCode": 0,
+      "hash": "0ed185bd0157e351",
+      "fanOut": 0,
+      "fanIn": 0,
+      "module": "(root)"
+    },
+    "src/build-map.mjs": {
+      "path": "src/build-map.mjs",
+      "loc": 571,
+      "rawLoc": 765,
+      "bytes": 28513,
+      "exports": [],
+      "isTest": false,
+      "todos": 4,
+      "commentedOutCode": 2,
+      "hash": "0004d18622b611bb",
+      "fanOut": 1,
+      "fanIn": 0,
+      "module": "(root)"
+    },
+    "src/check-freshness.mjs": {
+      "path": "src/check-freshness.mjs",
+      "loc": 170,
+      "rawLoc": 230,
+      "bytes": 8572,
+      "exports": [],
+      "isTest": false,
+      "todos": 0,
+      "commentedOutCode": 0,
+      "hash": "0471d4c76185144b",
+      "fanOut": 1,
+      "fanIn": 0,
+      "module": "(root)"
+    },
+    "src/hash.mjs": {
+      "path": "src/hash.mjs",
+      "loc": 46,
+      "rawLoc": 64,
+      "bytes": 2219,
+      "exports": [
+        "cheapHash",
+        "hashSource",
+        "stripComments"
+      ],
+      "isTest": false,
+      "todos": 0,
+      "commentedOutCode": 0,
+      "hash": "00c69626011a4f71",
+      "fanOut": 0,
+      "fanIn": 2,
+      "module": "(root)"
+    },
+    "src/query-map.mjs": {
+      "path": "src/query-map.mjs",
+      "loc": 244,
+      "rawLoc": 289,
+      "bytes": 11718,
+      "exports": [],
+      "isTest": false,
+      "todos": 0,
+      "commentedOutCode": 0,
+      "hash": "05a59aff81ca577a",
+      "fanOut": 0,
+      "fanIn": 0,
+      "module": "(root)"
+    },
+    "src/report-map.mjs": {
+      "path": "src/report-map.mjs",
+      "loc": 437,
+      "rawLoc": 535,
+      "bytes": 22814,
+      "exports": [],
+      "isTest": false,
+      "todos": 0,
+      "commentedOutCode": 0,
+      "hash": "0d0793c182bdb1c8",
+      "fanOut": 0,
+      "fanIn": 0,
+      "module": "(root)"
+    },
+    "src/write-context.mjs": {
+      "path": "src/write-context.mjs",
+      "loc": 255,
+      "rawLoc": 323,
+      "bytes": 14302,
+      "exports": [],
+      "isTest": false,
+      "todos": 0,
+      "commentedOutCode": 0,
+      "hash": "03291639020e6d59",
+      "fanOut": 0,
+      "fanIn": 0,
+      "module": "(root)"
+    },
+    "test/e2e.test.mjs": {
+      "path": "test/e2e.test.mjs",
+      "loc": 291,
+      "rawLoc": 358,
+      "bytes": 14925,
+      "exports": [
+        "fake",
+        "feature",
+        "real",
+        "sample",
+        "unused"
+      ],
+      "isTest": true,
+      "todos": 0,
+      "commentedOutCode": 1,
+      "hash": "09128aad62127b33",
+      "fanOut": 0,
+      "fanIn": 0,
+      "module": "(root)"
+    }
+  },
+  "edges": [
+    {
+      "from": "src/build-map.mjs",
+      "to": "src/hash.mjs"
+    },
+    {
+      "from": "src/check-freshness.mjs",
+      "to": "src/hash.mjs"
+    }
+  ],
+  "modules": {
+    "(root)": {
+      "name": "(root)",
+      "files": [
+        "bin/cli.mjs",
+        "src/build-map.mjs",
+        "src/check-freshness.mjs",
+        "src/hash.mjs",
+        "src/query-map.mjs",
+        "src/report-map.mjs",
+        "src/write-context.mjs",
+        "test/e2e.test.mjs"
+      ],
+      "loc": 2112,
+      "exports": 8,
+      "internalEdges": 2,
+      "outgoingEdges": 0,
+      "incomingEdges": 0,
+      "cohesion": 1,
+      "fileCount": 8
+    }
+  },
+  "moduleEdges": [],
+  "entries": [
+    "bin/cli.mjs",
+    "src/build-map.mjs",
+    "src/check-freshness.mjs",
+    "src/query-map.mjs",
+    "src/report-map.mjs",
+    "src/write-context.mjs",
+    "test/e2e.test.mjs"
+  ],
+  "warnings": [],
+  "findings": {
+    "orphans": [],
+    "testOnly": [],
+    "cycles": [],
+    "unresolved": [
+      {
+        "from": "test/e2e.test.mjs",
+        "specifier": "./does-not-exist"
+      }
+    ],
+    "unusedDeps": [],
+    "undeclaredDeps": [
+      ");\n    assert.ok(!s.edges.some((e) => e.to"
+    ],
+    "depsOnlyUsedInTests": [],
+    "junkFiles": [],
+    "largeFiles": [],
+    "identicalFiles": []
+  },
+  "externalUsage": {
+    "node:child_process": [
+      "bin/cli.mjs",
+      "src/build-map.mjs",
+      "src/check-freshness.mjs",
+      "src/report-map.mjs",
+      "test/e2e.test.mjs"
+    ],
+    "node:url": [
+      "bin/cli.mjs",
+      "test/e2e.test.mjs"
+    ],
+    "node:path": [
+      "bin/cli.mjs",
+      "src/build-map.mjs",
+      "src/check-freshness.mjs",
+      "src/query-map.mjs",
+      "src/report-map.mjs",
+      "src/write-context.mjs",
+      "test/e2e.test.mjs"
+    ],
+    "node:fs": [
+      "bin/cli.mjs",
+      "src/build-map.mjs",
+      "src/check-freshness.mjs",
+      "src/query-map.mjs",
+      "src/report-map.mjs",
+      "src/write-context.mjs",
+      "test/e2e.test.mjs"
+    ],
+    "node:test": [
+      "test/e2e.test.mjs"
+    ],
+    "node:assert/strict": [
+      "test/e2e.test.mjs"
+    ],
+    "node:os": [
+      "test/e2e.test.mjs"
+    ],
+    ");\n    assert.ok(!s.edges.some((e) => e.to": [
+      "test/e2e.test.mjs"
+    ]
+  }
+}

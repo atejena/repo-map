@@ -1,0 +1,12 @@
+{
+  "_README": "The CLI spawns each src/ script as a subprocess rather than importing it, so static analysis sees no edge to them. Declaring them as entries is the documented remedy for dynamic invocation. See README, 'When the map is wrong'.",
+  "roots": ["src", "bin", "test"],
+  "entries": [
+    "src/build-map.mjs",
+    "src/report-map.mjs",
+    "src/write-context.mjs",
+    "src/check-freshness.mjs",
+    "src/query-map.mjs"
+  ],
+  "moduleDepth": 1
+}
