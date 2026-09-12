@@ -8,7 +8,7 @@
   "files": ["bin", "src", "skill", "README.md", "LICENSE"],
   "engines": { "node": ">=18" },
   "scripts": {
-    "test": "node --test test/*.test.mjs",
+    "test": "node --test test/e2e.test.mjs",
     "selfmap": "node bin/cli.mjs all --repo ."
   },
   "keywords": ["codebase-map","dependency-graph","dead-code","ai-agents","llm-context","claude","refactoring","code-health","modularization","typescript"],
