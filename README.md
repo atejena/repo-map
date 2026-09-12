@@ -200,7 +200,7 @@ IMPORT PATH (2 hops):
 }
 ```
 
-**`entries` is the one that matters.** Entry points drive reachability, reachability drives orphan detection, and a missing entry point makes live code look dead. Auto-detection handles Next.js app and pages routing, Supabase edge functions, `package.json` main/bin/exports, `middleware.*`, config files, and test files. It cannot detect something a scheduler invokes by name.
+**`entries` is the one that matters.** Entry points drive reachability, reachability drives orphan detection, and a missing entry point makes live code look dead. Auto-detection handles Next.js app and pages routing (including the conventional files no route imports: `not-found`, `robots`, `sitemap`, `manifest`, the `opengraph-image`/`icon` routes, at any depth), Supabase edge functions, `package.json` main/bin/exports, `middleware.*`, config files, and test files. An `index.ts` counts as an entry only at the repo root or one level down; a deeper barrel nothing imports is an orphan like any other file, and everything behind it is reported too. It cannot detect something a scheduler invokes by name.
 
 If no entry points are found, or if a majority of files come back orphaned, the tool warns loudly rather than presenting the result as fact.
 

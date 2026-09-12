@@ -1,6 +1,6 @@
 {
   "name": "repo-map",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Keeps a committed map of your codebase so AI agents can understand it without reading every file, and so dead code, junk and coupling get caught before they land.",
   "type": "module",
   "bin": { "repo-map": "bin/cli.mjs" },

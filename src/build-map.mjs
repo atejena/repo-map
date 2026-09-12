@@ -436,13 +436,22 @@ for (const rel of Object.keys(files)) {
 // Entry points and reachability
 // ---------------------------------------------------------------------------
 
+// Next.js App Router conventions. The root of `app/` carries files no route
+// imports (not-found, robots, sitemap, manifest, the image routes), so they
+// are entries by convention, at the root and at any depth.
+const NEXT_APP_FILES =
+  'page|layout|route|template|default|error|global-error|loading|not-found|robots|sitemap|manifest|opengraph-image|twitter-image|icon|apple-icon';
+
 const ENTRY_PATTERNS = [
-  /(^|\/)app\/.*\/(page|layout|route|template|error|loading|not-found)\.[tj]sx?$/,
-  /(^|\/)app\/(page|layout|route)\.[tj]sx?$/,
+  new RegExp(`(^|\\/)app\\/(.*\\/)?(${NEXT_APP_FILES})\\.[tj]sx?$`),
   /(^|\/)pages\/.*\.[tj]sx?$/,
   /(^|\/)api\/.*\.[tj]sx?$/,
   /(^|\/)supabase\/functions\/[^/]+\/index\.ts$/,
-  /(^|\/)(server|main|index|app|worker|cli)\.[tj]sx?$/,
+  /(^|\/)(server|main|app|worker|cli)\.[tj]sx?$/,
+  // `index.ts` is an entry only at the repo root or one level down (src/index.ts).
+  // Deeper barrels (src/components/foo/index.ts) are ordinary files: counting
+  // them as entries hid 13 dead files behind two barrels nobody imported.
+  /^\/?([^/]+\/)?index\.[tj]sx?$/,
   /(^|\/)middleware\.[tj]s$/,
   /\.config\.[tjm]s$/,
   /(^|\/)scripts\/[^/]+\.[tjm]s$/,

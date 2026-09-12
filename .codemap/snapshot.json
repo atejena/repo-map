@@ -1,14 +1,14 @@
 {
   "schema": "codemap/1",
-  "generatedAt": "2026-08-17T14:31:41.183Z",
-  "repo": "repo-surveyor",
+  "generatedAt": "2026-09-12T03:10:04.432Z",
+  "repo": "repo-map",
   "git": {
-    "sha": "a9537c66e8d1d7816fc8c261c3b364eacd13fb8d",
-    "shortSha": "a9537c6",
-    "branch": "master",
-    "subject": "v0.1.0",
-    "author": "t",
-    "committedAt": "2026-08-17T14:13:58+00:00"
+    "sha": "b8f179b514300424136bb32c7ca710a4ad6c3d2f",
+    "shortSha": "b8f179b",
+    "branch": "main",
+    "subject": "Add CI workflow",
+    "author": "Alex Tejena",
+    "committedAt": "2026-08-17T12:40:26-04:00"
   },
   "config": {
     "roots": [
@@ -22,7 +22,7 @@
   "totals": {
     "files": 8,
     "testFiles": 1,
-    "loc": 2112,
+    "loc": 2145,
     "edges": 2,
     "modules": 1,
     "entries": 7,
@@ -45,14 +45,14 @@
     },
     "src/build-map.mjs": {
       "path": "src/build-map.mjs",
-      "loc": 571,
-      "rawLoc": 765,
-      "bytes": 28513,
+      "loc": 573,
+      "rawLoc": 774,
+      "bytes": 29105,
       "exports": [],
       "isTest": false,
       "todos": 4,
       "commentedOutCode": 2,
-      "hash": "0004d18622b611bb",
+      "hash": "02f6ade2e2b89f96",
       "fanOut": 1,
       "fanIn": 0,
       "module": "(root)"
@@ -133,9 +133,9 @@
     },
     "test/e2e.test.mjs": {
       "path": "test/e2e.test.mjs",
-      "loc": 291,
-      "rawLoc": 358,
-      "bytes": 14925,
+      "loc": 322,
+      "rawLoc": 395,
+      "bytes": 16940,
       "exports": [
         "fake",
         "feature",
@@ -146,7 +146,7 @@
       "isTest": true,
       "todos": 0,
       "commentedOutCode": 1,
-      "hash": "09128aad62127b33",
+      "hash": "079fee9a52365c1d",
       "fanOut": 0,
       "fanIn": 0,
       "module": "(root)"
@@ -175,7 +175,7 @@
         "src/write-context.mjs",
         "test/e2e.test.mjs"
       ],
-      "loc": 2112,
+      "loc": 2145,
       "exports": 8,
       "internalEdges": 2,
       "outgoingEdges": 0,

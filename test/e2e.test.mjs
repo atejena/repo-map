@@ -92,6 +92,43 @@ export function formatMoney(n: number) { return _.round(n, 2); }`);
 before(() => { tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'repo-map-test-')); });
 after(() => { try { fs.rmSync(tmp, { recursive: true, force: true }); } catch { /* best effort */ } });
 
+describe('entry points', () => {
+  let root;
+  before(() => {
+    root = fs.mkdtempSync(path.join(tmp, 'entries-'));
+    write(root, 'package.json', JSON.stringify({ name: 'entries', dependencies: {} }));
+    // Next.js App Router: files no route imports, at the root and deeper.
+    write(root, 'app/page.tsx', `export default function Page() { return null; }`);
+    write(root, 'app/robots.ts', `export default function robots() { return { rules: [] }; }`);
+    write(root, 'app/not-found.tsx', `export default function NotFound() { return null; }`);
+    write(root, 'app/blog/opengraph-image.tsx', `export default function Image() { return null; }`);
+    // A conventional entry one level down, and a deep barrel nobody imports.
+    write(root, 'src/index.ts', `export const boot = () => 1;`);
+    write(root, 'src/components/widget/index.ts', `export { inner } from './inner';`);
+    write(root, 'src/components/widget/inner.ts', `export const inner = 1;`);
+    sh('git', ['init', '-q'], root);
+    commit(root, 'initial');
+    cli(['map', '--quiet'], root);
+  });
+
+  test('Next.js conventional files are entries at any depth', () => {
+    const { entries, findings } = snapshot(root);
+    for (const f of ['app/page.tsx', 'app/robots.ts', 'app/not-found.tsx', 'app/blog/opengraph-image.tsx']) {
+      assert.ok(entries.includes(f), `${f} should be an entry point`);
+      assert.ok(!findings.orphans.includes(f), `${f} must not be reported as an orphan`);
+    }
+  });
+
+  test('index.ts is an entry at the root or one level down, not as a deep barrel', () => {
+    const { entries, findings } = snapshot(root);
+    assert.ok(entries.includes('src/index.ts'));
+    assert.ok(!entries.includes('src/components/widget/index.ts'), 'a deep barrel is an ordinary file');
+    // Nothing imports the barrel, so it and everything behind it are unreachable.
+    assert.ok(findings.orphans.includes('src/components/widget/index.ts'));
+    assert.ok(findings.orphans.includes('src/components/widget/inner.ts'));
+  });
+});
+
 describe('map', () => {
   let root;
   before(() => { root = makeRepo('map'); cli(['map', '--quiet'], root); });
